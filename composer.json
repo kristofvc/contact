@@ -17,6 +17,9 @@
         "symfony/form": ">=2.3",
         "symfony/event-dispatcher": ">=2.3"
     },
+    "suggest": {
+        "guzzle/guzzle": "If you want to integrate with slack you could use guzzle to send your data to slack"
+    },
     "autoload": {
         "psr-4": { "Kristofvc\\Contact\\": "" }
     }
