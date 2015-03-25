@@ -2,6 +2,10 @@
 
 namespace Kristofvc\Contact\Model;
 
+/**
+ * Class Contact
+ * @package Kristofvc\Contact\Model
+ */
 final class Contact implements ContactInterface
 {
     /**

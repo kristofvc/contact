@@ -51,6 +51,8 @@ final class SlackListener
     }
 
     /**
+     * Send a message to slack with the data that was submitted in the contact form
+     *
      * @param ContactEvent $event
      */
     public function pushMessage(ContactEvent $event)

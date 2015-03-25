@@ -6,6 +6,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+/**
+ * Class ContactType
+ * @package Kristofvc\Contact\Form\Type
+ */
 class ContactType extends AbstractType implements ContactTypeInterface
 {
     /**
@@ -20,6 +24,7 @@ class ContactType extends AbstractType implements ContactTypeInterface
 
     /**
      * @param $hasRecaptcha
+     * @param string $dataClass
      */
     public function __construct($hasRecaptcha, $dataClass = 'Kristofvc\Contact\Model\Contact')
     {

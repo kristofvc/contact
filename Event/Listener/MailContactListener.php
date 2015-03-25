@@ -38,6 +38,8 @@ final class MailContactListener
     }
 
     /**
+     * Send a mail with the data that was submitted in the contact form
+     *
      * @param ContactEvent $event
      */
     public function sendMail(ContactEvent $event)
