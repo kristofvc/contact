@@ -18,6 +18,9 @@ final class Contact implements ContactInterface
      */
     private $email;
 
+    /**
+     * @var mixed
+     */
     private $recaptcha;
 
     /**
