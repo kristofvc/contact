@@ -35,6 +35,7 @@ class ContactTypeSpec extends ObjectBehavior
     function it_should_implement_contact_type_interface()
     {
         $this->shouldImplement('Kristofvc\Contact\Form\Type\ContactTypeInterface');
+        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
     function let()

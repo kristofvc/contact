@@ -10,6 +10,7 @@
  */
 
 namespace Kristofvc\Contact\Form\Type;
+use Symfony\Component\Form\FormTypeInterface;
 
 /**
  * Interface ContactTypeInterface
@@ -17,6 +18,6 @@ namespace Kristofvc\Contact\Form\Type;
  *
  * @author Kristof Van Cauwenbergh <kristof.vancauwenbergh@gmail.com>
  */
-interface ContactTypeInterface
+interface ContactTypeInterface extends FormTypeInterface
 {
 }
