@@ -86,11 +86,13 @@ final class Contact
 
         if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);
+            $event = ContactEvent::createWith($form->getData());
             if ($form->isValid()) {
-                $event = ContactEvent::createWith($form->getData());
-                $this->eventDispatcher->dispatch(ContactEvents::CONTACT_SUBMITTED_EVENT, $event);
+                $this->eventDispatcher->dispatch(ContactEvents::CONTACT_SUBMIT_SUCCESS_EVENT, $event);
 
                 $form = $this->formFactory->create($this->contactType);
+            } else {
+                $this->eventDispatcher->dispatch(ContactEvents::CONTACT_SUBMIT_FAILURE_EVENT, $event);
             }
         }
 

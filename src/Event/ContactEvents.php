@@ -20,7 +20,12 @@ namespace Kristofvc\Contact\Event;
 final class ContactEvents
 {
     /**
-     * This event is thrown when somebody submits the contact-form
+     * This event is thrown when somebody submits the contact-form successfully
      */
-    const CONTACT_SUBMITTED_EVENT = 'contact.contact_submitted_event';
+    const CONTACT_SUBMIT_SUCCESS_EVENT = 'contact.contact_submit_success_event';
+
+    /**
+     * This event is thrown when somebody submits the contact-form but a failure occurred
+     */
+    const CONTACT_SUBMIT_FAILURE_EVENT = 'contact.contact_submit_failure_event';
 }
