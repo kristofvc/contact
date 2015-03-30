@@ -13,7 +13,6 @@ namespace Kristofvc\Contact\Controller;
 
 use Kristofvc\Contact\Event\ContactEvent;
 use Kristofvc\Contact\Event\ContactEvents;
-use Kristofvc\Contact\Form\Type\ContactType;
 use Kristofvc\Contact\Form\Type\ContactTypeInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -98,7 +97,9 @@ final class Contact
         return new Response(
             $this->templating->render(
                 $this->template,
-                ['form' => $form->createView()]
+                [
+                    'form' => $form->createView()
+                ]
             )
         );
     }

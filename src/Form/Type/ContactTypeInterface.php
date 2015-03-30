@@ -10,6 +10,7 @@
  */
 
 namespace Kristofvc\Contact\Form\Type;
+
 use Symfony\Component\Form\FormTypeInterface;
 
 /**
