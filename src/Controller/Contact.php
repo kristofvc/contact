@@ -11,11 +11,7 @@
 
 namespace Kristofvc\Contact\Controller;
 
-use Kristofvc\Contact\Event\ContactEvent;
-use Kristofvc\Contact\Event\ContactEvents;
-use Kristofvc\Contact\Form\Type\ContactTypeInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Form\FormFactoryInterface;
+use Kristofvc\Contact\Form\Handler\ContactFormHandlerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Templating\EngineInterface;
@@ -33,20 +29,6 @@ final class Contact
      */
     private $templating;
 
-    /**
-     * @var FormFactoryInterface
-     */
-    private $formFactory;
-
-    /**
-     * @var EventDispatcherInterface
-     */
-    private $eventDispatcher;
-
-    /**
-     * @var ContactTypeInterface
-     */
-    private $contactType;
 
     /**
      * @var string
@@ -54,23 +36,22 @@ final class Contact
     private $template;
 
     /**
+     * @var ContactFormHandlerInterface
+     */
+    private $formHandler;
+
+    /**
      * @param EngineInterface $templating
-     * @param FormFactoryInterface $formFactory
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param ContactTypeInterface $contactType
+     * @param ContactFormHandlerInterface $formHandler
      * @param $template
      */
     public function __construct(
         EngineInterface $templating,
-        FormFactoryInterface $formFactory,
-        EventDispatcherInterface $eventDispatcher,
-        ContactTypeInterface $contactType,
+        ContactFormHandlerInterface $formHandler,
         $template
     ) {
         $this->templating = $templating;
-        $this->formFactory = $formFactory;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->contactType = $contactType;
+        $this->formHandler = $formHandler;
         $this->template = $template;
     }
 
@@ -80,17 +61,12 @@ final class Contact
      */
     public function __invoke(Request $request)
     {
-        $form = $this->formFactory->createBuilder($this->contactType);
-        $form->setAction($request->getBasePath());
-        $form = $form->getForm();
+        $form = $this->formHandler->getForm($request->getBasePath());
 
         if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);
-            if ($form->isValid()) {
-                $event = ContactEvent::createWith($form->getData());
-                $this->eventDispatcher->dispatch(ContactEvents::CONTACT_SUBMITTED_EVENT, $event);
-
-                $form = $this->formFactory->create($this->contactType);
+            if ($this->formHandler->handleForm($form)) {
+                $form = $this->formHandler->getForm($request->getBasePath());
             }
         }
 

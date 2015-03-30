@@ -3,19 +3,23 @@
 ## Add some services
 
 ```xml
-        <service id="kristofvc_contact.controller.contact" class="Kristofvc\Contact\Controller\Contact">
-            <argument type="service" id="templating" />
+        <service id="kristofvc_contact.form.handler.contact" class="Kristofvc\Contact\Form\Handler\ContactFormHandler">
             <argument type="service" id="form.factory" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="kristofvc_contact.form.type.contact" />
-            <argument>:Main:contact.html.twig</argument>
         </service>
+
+        <service id="kristofvc_contact.controller.contact" class="Kristofvc\Contact\Controller\Contact">
+            <argument type="service" id="templating" />
+            <argument type="service" id="kristofvc_contact.form.handler.contact" />
+            <argument>:Home:contact.html.twig</argument>
+        </service> 
 
         <service id="kristofvc_contact.event.mail_contact_listener" class="Kristofvc\Contact\Event\Listener\MailContactListener">
             <argument type="service" id="mailer" />
             <argument>%mailer_from%</argument>
             <argument>%mailer_to%</argument>
-            <tag name="kernel.event_listener" event="contact.contact_submitted_event" method="sendMail" />
+            <tag name="kernel.event_listener" event="contact.contact_submit_success_event" method="sendMail" />
         </service>
 
         <service id="kristofvc_contact.provider.simple_message" class="Kristofvc\Contact\Provider\SimpleMessageProvider" />
@@ -23,7 +27,7 @@
         <service id="kristofvc_contact.event.success_notice_listener" class="Kristofvc\Contact\Event\Listener\SuccessNoticeListener">
             <argument type="service" id="session" />
             <argument type="service" id="kristofvc_contact.provider.simple_message" />
-            <tag name="kernel.event_listener" event="contact.contact_submitted_event" method="sendSuccessNotice" />
+            <tag name="kernel.event_listener" event="contact.contact_submit_success_event" method="sendSuccessNotice" />
         </service>
 
         <service id="kristofvc_contact.form.type.contact" class="Kristofvc\Contact\Form\Type\ContactType">
