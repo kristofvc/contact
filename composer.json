@@ -27,8 +27,8 @@
         "guzzlehttp/guzzle": "If you want to integrate with slack you could use guzzle to send your data to slack",
         "excelwebzone/recaptcha-bundle": "Install this bundle if you want a recaptcha in your contact form",
         "symfony/validator": "Install the symfony validation component if you want validation of your contact model class",
-        "doctrine/orm": "Install Doctrine ORM to persist your contact form in a relational database",
-        "symfony/translation": "Add the symfony translator if you want to make the flash message translatable"
+        "symfony/translation": "Add the symfony translator if you want to make the flash message translatable",
+        "doctrine/orm": "Install Doctrine ORM to persist your contact form in a relational database"
     },
     "autoload": {
         "psr-4": {
