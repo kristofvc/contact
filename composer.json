@@ -1,0 +1,45 @@
+{
+    "name": "kristofvc/contact",
+    "type": "component",
+    "description": "This is a component that defines a contact page",
+    "keywords": ["contact", "form"],
+    "homepage": "http://github.com/kristofvc/Contact",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kristof Van Cauwenbergh",
+            "email": "kristof.vancauwenbergh@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "symfony/http-foundation": ">=2.3",
+        "symfony/form": ">=2.3",
+        "symfony/event-dispatcher": ">=2.3",
+        "symfony/templating": ">=2.3"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "~2.3",
+        "phpspec/phpspec": "~2.1",
+        "symfony/translation": ">=2.3",
+        "doctrine/common": ">=2.3",
+        "swiftmailer/swiftmailer": ">=2.3",
+        "guzzlehttp/guzzle": "~5.2"
+    },
+    "suggest": {
+        "guzzlehttp/guzzle": "If you want to integrate with slack you could use guzzle to send your data to slack",
+        "excelwebzone/recaptcha-bundle": "Install this bundle if you want a recaptcha in your contact form",
+        "symfony/validator": "Install the symfony validation component if you want validation of your contact model class",
+        "symfony/translation": "Add the symfony translator if you want to make the flash message translatable",
+        "doctrine/orm": "Install Doctrine ORM to persist your contact form in a relational database",
+        "swiftmailer/swiftmailer": "Use this component if you want to send mails about who contacted you"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kristofvc\\Component\\Contact\\": [ "src/" ]
+        }
+    },
+    "config": {
+      "bin-dir": "bin"
+    }
+}
