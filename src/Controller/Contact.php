@@ -70,7 +70,7 @@ final class Contact
         EngineInterface $templating,
         FormFactoryInterface $formFactory,
         EventDispatcherInterface $eventDispatcher,
-        ContactTypeInterface $contactType,
+        $contactType,
         $template,
         $submitPath = null
     ) {
@@ -100,6 +100,7 @@ final class Contact
 
         if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);
+
             $event = ContactEvent::createWith($form->getData());
             if ($form->isValid()) {
                 $this->eventDispatcher->dispatch(ContactEvents::CONTACT_SUBMIT_SUCCESS_EVENT, $event);

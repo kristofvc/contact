@@ -11,8 +11,13 @@
 
 namespace Kristofvc\Component\Contact\Form\Type;
 
+use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -60,7 +65,7 @@ final class ContactType extends AbstractType implements ContactTypeInterface
     {
         $builder->add(
             'name',
-            'text',
+            TextType::class,
             [
                 'required' => true,
                 'attr' => [
@@ -72,7 +77,7 @@ final class ContactType extends AbstractType implements ContactTypeInterface
 
         $builder->add(
             'email',
-            'email',
+            EmailType::class,
             [
                 'required' => true,
                 'attr' => [
@@ -83,12 +88,12 @@ final class ContactType extends AbstractType implements ContactTypeInterface
         );
 
         if ($this->hasRecaptcha) {
-            $builder->add('recaptcha', 'ewz_recaptcha');
+            $builder->add('recaptcha', EWZRecaptchaType::class);
         }
 
         $builder->add(
             'message',
-            'textarea',
+            TextareaType::class,
             [
                 'required' => true,
                 'attr' => [
@@ -103,7 +108,7 @@ final class ContactType extends AbstractType implements ContactTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => $this->dataClass,
